@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Mobil | Dealer Mobil</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <style>
+    /* FILTER CARD */
+    .filter-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-top: -45px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .filter-form {
+      display: grid;
+      grid-template-columns: 1fr 210px 210px 160px;
+      gap: 14px;
+      align-items: end;
+    }
+
+    .filter-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .input-with-icon { position: relative; }
+    .input-with-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-light);
+      font-size: 14px;
+    }
+    .input-with-icon .form-control { padding-left: 44px; }
+
+    .btn-search-filter {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: 0.3s;
+      box-shadow: var(--shadow-red);
+      font-family: 'Poppins', sans-serif;
+    }
+    .btn-search-filter:hover { transform: translateY(-2px); }
+
+    .btn-reset-filter {
+      width: 100%;
+      padding: 13px;
+      border: 1.5px solid var(--gray-border);
+      border-radius: 14px;
+      background: white;
+      color: var(--gray);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+    .btn-reset-filter:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* TOP INFO */
+    .top-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 36px 0 26px;
+    }
+
+    .top-info h2 { font-size: 28px; font-weight: 700; }
+    .top-info p { color: var(--gray); font-size: 14px; margin-top: 4px; }
+
+    .result-box {
+      background: white;
+      padding: 13px 22px;
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .result-box i { color: var(--primary); }
+
+    /* ACTIVE FILTERS TAGS */
+    .active-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .filter-tag {
+      background: rgba(220,38,38,.1);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .filter-tag:hover { background: rgba(220,38,38,.18); }
+    .filter-tag i { font-size: 10px; }
+  </style>
+</head>
+<body>
+
+  <!-- LOADING -->
+  <div id="loadingScreen">
+    <div class="loader-logo">
+      <div class="loader-icon"><i class="fa-solid fa-car-side"></i></div>
+      <div class="loader-text">
+        <h2>Dealer<span>Mobil</span></h2>
+        <p>Memuat Koleksi...</p>
+      </div>
+    </div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-car-side"></i></div>
+        <div class="logo-text">
+          <h2>Dealer<span>Mobil</span></h2>
+          <p>Showroom Mobil Modern</p>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="mobil.html"><i class="fa-solid fa-car"></i> Mobil</a></li>
+        <li><a href="tentang.html"><i class="fa-solid fa-circle-info"></i> Tentang</a></li>
+        <li><a href="kontak.html"><i class="fa-solid fa-phone"></i> Kontak</a></li>
+      </ul>
+      <div class="nav-right">
+        <form id="navSearchForm" style="display:flex;">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="navSearchInput" type="text" placeholder="Cari mobil...">
+          </div>
+        </form>
+        <a href="mobil.html" class="nav-btn"><i class="fa-solid fa-car"></i> Jelajahi Mobil</a>
+        <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO BANNER -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb" style="justify-content:center; margin-bottom:18px;">
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
+        <span>Daftar Mobil</span>
+      </div>
+      <h1>Temukan <span>Mobil Impian</span> Anda</h1>
+      <p>Koleksi kendaraan premium pilihan dengan harga transparan, kualitas terjamin, dan pelayanan profesional.</p>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <div class="container">
+
+    <!-- FILTER CARD -->
+    <div class="filter-card">
+      <form id="searchForm">
+        <div class="filter-form">
+          <!-- Search -->
+          <div>
+            <label class="filter-label"><i class="fa-solid fa-magnifying-glass"></i> &nbsp;Cari Mobil</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="searchInput" type="text" class="form-control" placeholder="Cari nama, merk, atau tipe mobil...">
+            </div>
+          </div>
+
+          <!-- Transmisi -->
+          <div>
+            <label class="filter-label"><i class="fa-solid fa-gear"></i> &nbsp;Transmisi</label>
+            <select id="transmisiFilter" class="form-control">
+              <option value="">Semua Transmisi</option>
+              <option value="Manual">Manual</option>
+              <option value="Automatic">Automatic</option>
+            </select>
+          </div>
+
+          <!-- Merk -->
+          <div>
+            <label class="filter-label"><i class="fa-solid fa-car"></i> &nbsp;Merk</label>
+            <select id="merkFilter" class="form-control">
+              <option value="">Semua Merk</option>
+            </select>
+          </div>
+
+          <!-- Buttons -->
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <button type="submit" class="btn-search-filter">
+              <i class="fa-solid fa-filter"></i> Cari
+            </button>
+            <button type="button" onclick="resetFilter()" class="btn-reset-filter">
+              <i class="fa-solid fa-rotate-left"></i> Reset
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- TOP INFO -->
+    <div class="top-info">
+      <div>
+        <h2>Daftar Mobil</h2>
+        <p>Pilihan mobil terbaik dengan kualitas premium dan harga bersaing</p>
+      </div>
+      <div class="result-box">
+        <i class="fa-solid fa-car-side"></i>
+        <span id="resultCount">0 Mobil Ditemukan</span>
+      </div>
+    </div>
+
+    <!-- ACTIVE FILTERS -->
+    <div class="active-filters" id="activeFilters"></div>
+
+    <!-- GRID -->
+    <div class="grid-auto" id="mobilGrid" style="margin-bottom:70px;"></div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <div class="footer-logo-icon"><i class="fa-solid fa-car-side"></i></div>
+            <div class="footer-logo-text">
+              <h2>Dealer<span>Mobil</span></h2>
+              <p>Showroom Mobil Terpercaya</p>
+            </div>
+          </div>
+          <p class="footer-desc">Dealer Mobil menyediakan berbagai pilihan mobil berkualitas dengan harga terbaik dan pelayanan profesional.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Menu Cepat</h3>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="mobil.html">Daftar Mobil</a></li>
+            <li><a href="tentang.html">Tentang Kami</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Layanan</h3>
+          <ul>
+            <li><a href="booking.html">Booking Mobil</a></li>
+            <li><a href="#">Test Drive</a></li>
+            <li><a href="#">Kredit Mobil</a></li>
+            <li><a href="#">Tukar Tambah</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Kontak Kami</h3>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <span>Jl. Raya Dealer Mobil No. 99, Jakarta</span>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+            <span>+62 812-3456-7890</span>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+            <span>info@dealermobil.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-content">
+        <p>© <span id="year"></span> <span>DealerMobil</span>. All Rights Reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" title="Kembali ke atas"><i class="fa-solid fa-arrow-up"></i></button>
+  <a href="https://wa.me/6281234567890" target="_blank" class="wa-float">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/mobil.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
