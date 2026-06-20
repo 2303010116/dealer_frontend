@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Mobil | Dealer Mobil</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <style>
+    .detail-wrap { padding: 50px 0 80px; }
+
+    /* GRID */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+      margin-bottom: 70px;
+    }
+
+    /* IMAGE PANEL */
+    .detail-gallery-main {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .detail-gallery-main img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      transition: 0.5s ease;
+      display: block;
+    }
+
+    .detail-gallery-main:hover img { transform: scale(1.04); }
+
+    .detail-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 6px 16px rgba(220,38,38,.3);
+    }
+
+    .detail-thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .thumb {
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2.5px solid transparent;
+      transition: 0.3s;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 85px;
+      object-fit: cover;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .thumb:hover, .thumb.active {
+      border-color: #dc2626;
+      box-shadow: 0 0 0 3px rgba(220,38,38,.2);
+    }
+
+    .thumb:hover img { transform: scale(1.05); }
+
+    /* QUICK SPECS */
+    .quick-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .qs-item {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: 0.3s;
+    }
+
+    .qs-item:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+
+    .qs-item i {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(220,38,38,.1);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .qs-item small { display: block; font-size: 11px; color: var(--gray); margin-bottom: 2px; }
+    .qs-item strong { font-size: 14px; font-weight: 700; color: var(--dark); }
+
+    /* INFO PANEL */
+    .detail-merk-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(220,38,38,.1);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .detail-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .detail-price {
+      background: white;
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 28px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .detail-price small { color: var(--gray); font-size: 13px; display: block; margin-bottom: 4px; }
+    .detail-price h2 { font-size: 38px; font-weight: 800; color: var(--success); margin-bottom: 10px; }
+
+    /* TABS */
+    .detail-tabs { margin-bottom: 28px; }
+
+    .detail-tabs-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: var(--light);
+      padding: 6px;
+      border-radius: 16px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: none;
+      color: var(--gray);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .tab-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* SPEC TABLE */
+    .spec-table {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--gray-border);
+      gap: 12px;
+      transition: 0.2s;
+    }
+
+    .spec-row:last-child { border-bottom: none; }
+    .spec-row:hover { background: rgba(220,38,38,.04); }
+
+    .spec-key {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gray);
+      font-size: 14px;
+      min-width: 160px;
+    }
+
+    .spec-key i { color: var(--primary); width: 16px; text-align: center; }
+
+    .spec-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      text-align: right;
+    }
+
+    .detail-desc {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      color: var(--gray);
+      line-height: 1.9;
+      font-size: 15px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ACTION BUTTONS */
+    .detail-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-wa {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: #25d366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      transition: 0.3s;
+      flex-shrink: 0;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(37,211,102,.3);
+    }
+
+    .btn-wa:hover { transform: translateY(-3px); color: white; }
+
+    /* RELATED */
+    .related-section { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <!-- LOADING -->
+  <div id="loadingScreen">
+    <div class="loader-logo">
+      <div class="loader-icon"><i class="fa-solid fa-car-side"></i></div>
+      <div class="loader-text">
+        <h2>Dealer<span>Mobil</span></h2>
+        <p>Memuat Detail...</p>
+      </div>
+    </div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-car-side"></i></div>
+        <div class="logo-text">
+          <h2>Dealer<span>Mobil</span></h2>
+          <p>Showroom Mobil Modern</p>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="mobil.html"><i class="fa-solid fa-car"></i> Mobil</a></li>
+        <li><a href="tentang.html"><i class="fa-solid fa-circle-info"></i> Tentang</a></li>
+        <li><a href="kontak.html"><i class="fa-solid fa-phone"></i> Kontak</a></li>
+      </ul>
+      <div class="nav-right">
+        <form id="navSearchForm" style="display:flex;">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="navSearchInput" type="text" placeholder="Cari mobil...">
+          </div>
+        </form>
+        <a href="mobil.html" class="nav-btn"><i class="fa-solid fa-car"></i> Jelajahi Mobil</a>
+        <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-spacer"></div>
+
+  <!-- DETAIL CONTENT -->
+  <div class="container detail-wrap">
+    <div id="detailContent">
+      <div style="text-align:center; padding:80px 0; color:var(--gray);">
+        <i class="fa-solid fa-spinner fa-spin" style="font-size:40px; margin-bottom:16px; display:block;"></i>
+        Memuat detail mobil...
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <div class="footer-logo-icon"><i class="fa-solid fa-car-side"></i></div>
+            <div class="footer-logo-text">
+              <h2>Dealer<span>Mobil</span></h2>
+              <p>Showroom Mobil Terpercaya</p>
+            </div>
+          </div>
+          <p class="footer-desc">Dealer Mobil menyediakan berbagai pilihan mobil berkualitas dengan harga terbaik dan pelayanan profesional.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Menu Cepat</h3>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="mobil.html">Daftar Mobil</a></li>
+            <li><a href="tentang.html">Tentang Kami</a></li>
+            <li><a href="booking.html">Booking</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Layanan</h3>
+          <ul>
+            <li><a href="booking.html">Booking Mobil</a></li>
+            <li><a href="#">Test Drive</a></li>
+            <li><a href="#">Kredit Mobil</a></li>
+            <li><a href="#">Tukar Tambah</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Kontak Kami</h3>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <span>Jl. Raya Dealer Mobil No. 99, Jakarta</span>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+            <span>+62 812-3456-7890</span>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+            <span>info@dealermobil.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-content">
+        <p>© <span id="year"></span> <span>DealerMobil</span>. All Rights Reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop"><i class="fa-solid fa-arrow-up"></i></button>
+  <a href="https://wa.me/6281234567890" target="_blank" class="wa-float">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/detail.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
