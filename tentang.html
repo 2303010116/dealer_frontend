@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontak Kami | Dealer Mobil</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <style>
+    /* KONTAK GRID */
+    .kontak-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* INFO SIDE */
+    .kontak-info h2 {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      color: var(--dark);
+    }
+
+    .kontak-info h2 span { color: var(--primary); }
+
+    .kontak-info > p {
+      color: var(--gray);
+      font-size: 15px;
+      line-height: 1.85;
+      margin-bottom: 36px;
+    }
+
+    .kontak-cards { display: flex; flex-direction: column; gap: 16px; }
+
+    .kontak-card {
+      background: white;
+      border-radius: 20px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      box-shadow: var(--shadow-sm);
+      transition: 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      border: 1.5px solid transparent;
+    }
+
+    .kontak-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: rgba(220,38,38,.2);
+    }
+
+    .kc-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 18px rgba(220,38,38,.25);
+    }
+
+    .kc-body small {
+      display: block;
+      font-size: 12px;
+      color: var(--gray-light);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .kc-body strong {
+      display: block;
+      font-size: 16px;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+
+    .kc-body span {
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    /* SOCIAL LINKS */
+    .kontak-social {
+      margin-top: 30px;
+    }
+
+    .kontak-social h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 14px;
+      background: white;
+      color: var(--dark);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: var(--shadow-sm);
+      border: 1.5px solid var(--gray-border);
+      transition: 0.3s;
+    }
+
+    .social-link:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* FORM SIDE */
+    .kontak-form-card {
+      background: white;
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .kontak-form-card h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--dark);
+    }
+
+    .kontak-form-card > p {
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .btn-send {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: 0.3s;
+      box-shadow: var(--shadow-red);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-send:hover { transform: translateY(-3px); }
+
+    /* MAP SECTION */
+    .map-section {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .map-header {
+      background: linear-gradient(135deg, #111827, #1f2937);
+      padding: 22px 28px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .map-header i { color: #f87171; }
+    .map-header h3 { font-size: 16px; }
+    .map-header p { font-size: 13px; color: #9ca3af; }
+
+    .map-embed {
+      height: 380px;
+      background: var(--light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: var(--gray);
+      font-size: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-embed::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(220,38,38,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(220,38,38,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .map-placeholder {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .map-placeholder i {
+      font-size: 60px;
+      color: rgba(220,38,38,.2);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .map-placeholder p { color: var(--gray); font-size: 15px; margin-bottom: 16px; }
+
+    /* FAQ */
+    .faq-list { max-width: 820px; margin: 0 auto; }
+
+    .faq-item {
+      background: white;
+      border-radius: 18px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .faq-item:hover { box-shadow: var(--shadow); }
+
+    .faq-question {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      gap: 16px;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--dark);
+      user-select: none;
+    }
+
+    .faq-question i {
+      color: var(--primary);
+      transition: 0.3s;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+
+    .faq-item.open .faq-question i { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      padding: 0 24px;
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding: 0 24px 20px;
+    }
+
+    /* SWEET MODAL (shared) */
+    .sweet-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+    }
+
+    .sweet-box {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%) scale(0.9);
+      z-index: 10000;
+      background: white;
+      border-radius: 28px;
+      padding: 44px 40px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 30px 60px rgba(0,0,0,.2);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .sweet-box.visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .sweet-icon {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 22px;
+    }
+
+    .sweet-title { font-size: 22px; font-weight: 800; margin-bottom: 12px; color: var(--dark); }
+    .sweet-msg { color: var(--gray); font-size: 14px; line-height: 1.8; margin-bottom: 28px; }
+
+    .sweet-btn {
+      padding: 14px 40px;
+      border: none; border-radius: 14px;
+      color: white; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .sweet-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+  </style>
+</head>
+<body>
+
+  <!-- LOADING -->
+  <div id="loadingScreen">
+    <div class="loader-logo">
+      <div class="loader-icon"><i class="fa-solid fa-car-side"></i></div>
+      <div class="loader-text"><h2>Dealer<span>Mobil</span></h2><p>Halaman Kontak...</p></div>
+    </div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-car-side"></i></div>
+        <div class="logo-text"><h2>Dealer<span>Mobil</span></h2><p>Showroom Mobil Modern</p></div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="mobil.html"><i class="fa-solid fa-car"></i> Mobil</a></li>
+        <li><a href="tentang.html"><i class="fa-solid fa-circle-info"></i> Tentang</a></li>
+        <li><a href="kontak.html"><i class="fa-solid fa-phone"></i> Kontak</a></li>
+      </ul>
+      <div class="nav-right">
+        <form id="navSearchForm" style="display:flex;">
+          <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i>
+            <input id="navSearchInput" type="text" placeholder="Cari mobil...">
+          </div>
+        </form>
+        <a href="mobil.html" class="nav-btn"><i class="fa-solid fa-car"></i> Jelajahi Mobil</a>
+        <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb" style="justify-content:center; margin-bottom:16px;">
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
+        <span>Kontak Kami</span>
+      </div>
+      <h1>Hubungi <span>Dealer Mobil</span></h1>
+      <p>Kami siap membantu Anda menemukan mobil impian. Hubungi kami melalui berbagai saluran yang tersedia.</p>
+    </div>
+  </section>
+
+  <!-- KONTAK SECTION -->
+  <section class="section">
+    <div class="container">
+      <div class="kontak-grid">
+
+        <!-- INFO CARDS -->
+        <div class="kontak-info animate-on-scroll">
+          <h2>Kami Siap <span>Membantu</span> Anda</h2>
+          <p>Jangan ragu untuk menghubungi tim kami. Kami akan merespons secepatnya dan memberikan solusi terbaik untuk kebutuhan otomotif Anda.</p>
+
+          <div class="kontak-cards">
+            <a href="tel:+6281234567890" class="kontak-card">
+              <div class="kc-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="kc-body">
+                <small>Telepon</small>
+                <strong>+62 812-3456-7890</strong>
+                <span>Senin – Sabtu, 08:00 – 20:00 WIB</span>
+              </div>
+            </a>
+            <a href="https://wa.me/6281234567890" target="_blank" class="kontak-card">
+              <div class="kc-icon" style="background:linear-gradient(135deg,#25d366,#128c7e);"><i class="fa-brands fa-whatsapp"></i></div>
+              <div class="kc-body">
+                <small>WhatsApp</small>
+                <strong>+62 812-3456-7890</strong>
+                <span>Respon cepat, online 24/7</span>
+              </div>
+            </a>
+            <a href="mailto:info@dealermobil.com" class="kontak-card">
+              <div class="kc-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="kc-body">
+                <small>Email</small>
+                <strong>info@dealermobil.com</strong>
+                <span>Balasan dalam 1×24 jam kerja</span>
+              </div>
+            </a>
+            <div class="kontak-card">
+              <div class="kc-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="kc-body">
+                <small>Lokasi Showroom</small>
+                <strong>Jl. Raya Dealer Mobil No. 99</strong>
+                <span>Jakarta Selatan, DKI Jakarta 12560</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="kontak-social">
+            <h4><i class="fa-solid fa-share-nodes" style="color:var(--primary);"></i> Ikuti Kami</h4>
+            <div class="social-links">
+              <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+              <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i> Instagram</a>
+              <a href="#" class="social-link"><i class="fa-brands fa-youtube"></i> YouTube</a>
+              <a href="#" class="social-link"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORM CARD -->
+        <div class="kontak-form-card animate-on-scroll">
+          <h3><i class="fa-solid fa-paper-plane" style="color:var(--primary);"></i> Kirim Pesan</h3>
+          <p>Isi formulir di bawah ini dan kami akan segera menghubungi Anda.</p>
+
+          <form id="kontakForm">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="form-group">
+                <label for="k_nama">Nama Lengkap <span class="req">*</span></label>
+                <div class="input-with-icon">
+                  <i class="fa-solid fa-user"></i>
+                  <input id="k_nama" type="text" class="form-control" placeholder="Nama Anda" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="k_email">Email <span class="req">*</span></label>
+                <div class="input-with-icon">
+                  <i class="fa-solid fa-envelope"></i>
+                  <input id="k_email" type="email" class="form-control" placeholder="email@contoh.com" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="k_no_hp">Nomor HP</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-phone"></i>
+                <input id="k_no_hp" type="text" class="form-control" placeholder="08xxxxxxxxxx">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="k_subjek">Subjek <span class="req">*</span></label>
+              <select id="k_subjek" class="form-control" required>
+                <option value="">-- Pilih Subjek --</option>
+                <option value="Tanya Harga">Tanya Harga Mobil</option>
+                <option value="Test Drive">Jadwal Test Drive</option>
+                <option value="Kredit">Informasi Kredit</option>
+                <option value="Servis">Layanan Servis</option>
+                <option value="Tukar Tambah">Tukar Tambah</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="k_pesan">Pesan <span class="req">*</span></label>
+              <textarea id="k_pesan" class="form-control" rows="5" placeholder="Tuliskan pesan atau pertanyaan Anda di sini..." required></textarea>
+            </div>
+            <button type="submit" class="btn-send">
+              <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="map-section animate-on-scroll">
+        <div class="map-header">
+          <div>
+            <h3><i class="fa-solid fa-map-location-dot"></i> Lokasi Showroom Kami</h3>
+            <p>Jl. Raya Dealer Mobil No. 99, Jakarta Selatan, DKI Jakarta 12560</p>
+          </div>
+        </div>
+        <div class="map-embed">
+          <div class="map-placeholder">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <p>Peta Lokasi Dealer Mobil</p>
+            <p style="font-size:13px; color:var(--gray-light);">Jl. Raya Dealer Mobil No. 99, Jakarta Selatan</p>
+            <a href="https://maps.google.com" target="_blank" class="btn btn-primary btn-sm">
+              <i class="fa-solid fa-map"></i> Buka di Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="background:white; border-radius:40px;">
+    <div class="container">
+      <div class="section-title animate-on-scroll">
+        <span class="subtitle">FAQ</span>
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+        <p>Temukan jawaban atas pertanyaan umum yang sering ditanyakan pelanggan kami.</p>
+      </div>
+      <div class="faq-list" id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <div class="footer-logo-icon"><i class="fa-solid fa-car-side"></i></div>
+            <div class="footer-logo-text"><h2>Dealer<span>Mobil</span></h2><p>Showroom Mobil Terpercaya</p></div>
+          </div>
+          <p class="footer-desc">Dealer Mobil menyediakan berbagai pilihan mobil berkualitas dengan harga terbaik dan pelayanan profesional.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Menu Cepat</h3>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="mobil.html">Daftar Mobil</a></li>
+            <li><a href="tentang.html">Tentang Kami</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Layanan</h3>
+          <ul>
+            <li><a href="booking.html">Booking Mobil</a></li>
+            <li><a href="#">Test Drive</a></li>
+            <li><a href="#">Kredit Mobil</a></li>
+            <li><a href="#">Tukar Tambah</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Kontak Kami</h3>
+          <div class="contact-item"><div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div><span>Jl. Raya Dealer Mobil No. 99, Jakarta</span></div>
+          <div class="contact-item"><div class="ci-icon"><i class="fa-solid fa-phone"></i></div><span>+62 812-3456-7890</span></div>
+          <div class="contact-item"><div class="ci-icon"><i class="fa-solid fa-envelope"></i></div><span>info@dealermobil.com</span></div>
+          <div class="contact-item"><div class="ci-icon"><i class="fa-solid fa-clock"></i></div><span>Senin – Sabtu, 08:00 – 20:00</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-content">
+        <p>© <span id="year"></span> <span>DealerMobil</span>. All Rights Reserved.</p>
+        <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop"><i class="fa-solid fa-arrow-up"></i></button>
+  <a href="https://wa.me/6281234567890" target="_blank" class="wa-float"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ---- FAQ ----
+    const faqs = [
+      { q: 'Bagaimana cara melakukan booking mobil?', a: 'Anda bisa melakukan booking melalui halaman Booking di website kami, atau hubungi langsung tim kami via WhatsApp dan telepon. Isi formulir dengan data lengkap dan tim kami akan menghubungi dalam 1×24 jam.' },
+      { q: 'Apakah tersedia fasilitas kredit/cicilan?', a: 'Ya, kami bekerja sama dengan lebih dari 10 lembaga keuangan terpercaya seperti bank dan leasing nasional untuk memberikan kemudahan kredit dengan bunga kompetitif dan proses cepat.' },
+      { q: 'Apakah ada garansi untuk mobil yang dibeli?', a: 'Semua kendaraan yang kami jual telah melalui inspeksi ketat 150+ titik. Untuk mobil baru, garansi resmi dari pabrikan berlaku penuh. Untuk mobil bekas, kami memberikan garansi mesin selama 1 bulan.' },
+      { q: 'Bisakah saya test drive sebelum membeli?', a: 'Tentu saja! Kami menyediakan layanan test drive gratis untuk semua kendaraan yang tersedia di showroom. Silakan hubungi kami untuk menjadwalkan test drive yang nyaman sesuai waktu Anda.' },
+      { q: 'Apakah proses STNK dan BPKB dibantu dealer?', a: 'Ya, kami mengurus seluruh kelengkapan dokumen termasuk STNK dan BPKB. Anda tidak perlu repot mengurus sendiri, semua proses kami tangani secara profesional dan transparan.' },
+      { q: 'Apakah bisa tukar tambah kendaraan lama?', a: 'Kami menerima tukar tambah kendaraan dengan estimasi harga yang kompetitif dan transparan. Tim appraiser kami akan menilai kendaraan Anda secara jujur dan memberikan penawaran terbaik.' },
+    ];
+
+    const faqList = document.getElementById('faqList');
+    faqList.innerHTML = faqs.map((f, i) => `
+      <div class="faq-item animate-on-scroll" id="faq-${i}">
+        <div class="faq-question" onclick="toggleFaq(${i})">
+          <span>${f.q}</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">${f.a}</div>
+      </div>
+    `).join('');
+
+    window.toggleFaq = function(idx) {
+      const item = document.getElementById('faq-' + idx);
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    };
+
+    // ---- Kontak Form ----
+    document.getElementById('kontakForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nama = document.getElementById('k_nama').value.trim();
+      const email = document.getElementById('k_email').value.trim();
+      const subjek = document.getElementById('k_subjek').value;
+      const pesan = document.getElementById('k_pesan').value.trim();
+
+      if (!nama || !email || !subjek || !pesan) {
+        showKontakAlert('error', 'Form Belum Lengkap', 'Mohon isi semua field yang diperlukan.');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showKontakAlert('error', 'Email Tidak Valid', 'Masukkan format email yang benar.');
+        return;
+      }
+
+      showKontakAlert('success', 'Pesan Terkirim! 🎉',
+        `Terima kasih <strong>${nama}</strong>! Pesan Anda telah kami terima. Tim kami akan menghubungi Anda melalui email <strong>${email}</strong> dalam 1×24 jam kerja.`
+      );
+      this.reset();
+    });
+
+    function showKontakAlert(type, title, msg) {
+      const old = document.getElementById('sweetModal');
+      if (old) old.remove();
+      const colors = { success: '#16a34a', error: '#dc2626' };
+      const icons  = { success: 'fa-circle-check', error: 'fa-circle-xmark' };
+      const color  = colors[type] || '#2563eb';
+      const icon   = icons[type]  || 'fa-circle-info';
+      const modal  = document.createElement('div');
+      modal.id = 'sweetModal';
+      modal.innerHTML = `
+        <div class="sweet-overlay" onclick="closeSweetModal()"></div>
+        <div class="sweet-box">
+          <div class="sweet-icon" style="background:${color}18; color:${color};">
+            <i class="fa-solid ${icon}"></i>
+          </div>
+          <h3 class="sweet-title">${title}</h3>
+          <p class="sweet-msg">${msg}</p>
+          <button class="sweet-btn" onclick="closeSweetModal()" style="background:${color};">OK</button>
+        </div>`;
+      document.body.appendChild(modal);
+      requestAnimationFrame(() => modal.querySelector('.sweet-box').classList.add('visible'));
+    }
+
+    window.closeSweetModal = function() {
+      const modal = document.getElementById('sweetModal');
+      if (modal) {
+        modal.querySelector('.sweet-box').classList.remove('visible');
+        setTimeout(() => modal.remove(), 300);
+      }
+    };
+
+    initScrollAnimations();
+  </script>
+</body>
+</html>
